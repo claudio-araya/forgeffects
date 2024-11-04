@@ -1,7 +1,6 @@
 import os
 import unittest
 import numpy as np
-import tensorflow as tf
 from forgeffects.FE import FE
 
 # Obtener la ruta de la carpeta actual (donde se encuentra el script)
@@ -17,23 +16,14 @@ CC = np.load(CC_path)
 CE = np.load(CE_path)
 EE = np.load(EE_path)
 
-# Convertir a tensores de TensorFlow
-CC = tf.convert_to_tensor(CC, dtype=tf.float32)
-CE = tf.convert_to_tensor(CE, dtype=tf.float32)
-EE = tf.convert_to_tensor(EE, dtype=tf.float32)
-
-# Transponer los tensores par que queden de la forma (numero de matrices, filas, columnas)
-CC_test = tf.transpose(CC, perm=[2, 0, 1])
-CE_test = tf.transpose(CE, perm=[2, 0, 1])
-EE_test = tf.transpose(EE, perm=[2, 0, 1])
-
 class TestFEFunction(unittest.TestCase):
     
     def test_CC_CE_EE_provided(self):
         """Prueba para el caso en el que se proporcionan CC, CE y EE."""
-        result = FE(CC=CC_test, CE=CE_test, EE=EE_test, rep = 2000, THR = 0.5, maxorder = 10)
+        result = FE(CC=CC, CE=CE, EE=EE, rep = 1000, THR = 0.5, maxorder = 5)
         self.assertIsInstance(result, list)  # Verifica que el resultado es una lista
         self.assertGreater(len(result), 0)  # Verifica que la lista no está vacía
+        #result[0].to_csv('archivo.csv', sep=';', index=False)
         print(result)
 
 if __name__ == "__main__":

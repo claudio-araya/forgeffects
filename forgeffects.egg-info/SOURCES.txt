@@ -15,3 +15,4 @@ forgeffects.egg-info/SOURCES.txt
 forgeffects.egg-info/dependency_links.txt
 forgeffects.egg-info/requires.txt
 forgeffects.egg-info/top_level.txt
+tests/test_FE.py

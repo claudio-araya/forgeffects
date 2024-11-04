@@ -4,7 +4,7 @@ setup(
     name="forgeffects",
     version="0.1",
     description="A package for forgotten effects theory computation using TensorFlow, NumPy, and Pandas.",
-    author="Tu Nombre",
+    author="Claudio Esteban Araya Toro",
     author_email="claudioesteban.at@gmail.com",
     url="https://github.com/claudio-araya/forgeffects",
     packages=find_packages(),

@@ -3,15 +3,14 @@ Name: forgeffects
 Version: 0.1
 Summary: A package for forgotten effects theory computation using TensorFlow, NumPy, and Pandas.
 Home-page: https://github.com/claudio-araya/forgeffects
-Author: Tu Nombre
+Author: Claudio Esteban Araya Toro
 Author-email: claudioesteban.at@gmail.com
-License: UNKNOWN
-Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 License-File: LICENSE
-
-UNKNOWN
-
+Requires-Dist: tensorflow==2.13
+Requires-Dist: tensorflow_probability==0.20.0
+Requires-Dist: numpy>=1.18
+Requires-Dist: pandas>=1.0
