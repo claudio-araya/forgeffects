@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="forgeffects",
-    version="0.1",
+    version="0.4",
     description="A package for forgotten effects theory computation using TensorFlow, NumPy, and Pandas.",
     author="Claudio Esteban Araya Toro",
     author_email="claudioesteban.at@gmail.com",
@@ -19,6 +19,6 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.8, <=3.11',
 )
 
