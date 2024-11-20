@@ -1,9 +1,16 @@
 from setuptools import setup, find_packages
+import os
+
+this_directory = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(this_directory, "README.md"), encoding="utf-8") as f:
+    long_description = f.read()
 
 setup(
     name="forgeffects",
-    version="0.4",
+    version="0.1.3",
     description="A package for forgotten effects theory computation using TensorFlow, NumPy, and Pandas.",
+    long_description=long_description,  
+    long_description_content_type="text/markdown",
     author="Claudio Esteban Araya Toro",
     author_email="claudioesteban.at@gmail.com",
     url="https://github.com/claudio-araya/forgeffects",

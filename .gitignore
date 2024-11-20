@@ -1,0 +1,26 @@
+# Ignorar carpetas de compilación
+build/
+dist/
+*.egg-info/
+
+# Archivos de configuración y dependencias locales
+__pycache__/
+*.py[cod]
+*.log
+
+# Configuración específica del entorno
+*.env
+*.venv
+.env/
+.venv/
+.idea/
+.vscode/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos temporales y de caché
+*.bak
+*.swp
+*.tmp
