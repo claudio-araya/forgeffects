@@ -19,17 +19,17 @@ EE = np.load(EE_path)
 
 class TestFEFunction(unittest.TestCase):
     
-    # def test_CC_CE_EE_provided(self):
-    #     """Prueba para el caso en el que se proporcionan CC, CE y EE."""
-    #     result = FE(CC=CC, CE=CE, EE=EE, rep = 10000, THR = 0.5, maxorder = 5)
-    #     self.assertIsInstance(result, list)  # Verifica que el resultado es una lista
-    #     self.assertGreater(len(result), 0)  # Verifica que la lista no está vacía
-    #     #result[0].to_csv('archivo.csv', sep=';', index=False)
-    #     print(result)
-
-    def test_directEffects(self):
-        result = directEffects(EE=EE, rep = 1000, THR = 0.5, conf_level=0.95)
+    def test_CC_CE_EE_provided(self):
+        """Prueba para el caso en el que se proporcionan CC, CE y EE."""
+        result = FE(CC=CC, CE=CE, EE=EE, rep = 10000, THR = 0.5, maxorder = 5)
+        self.assertIsInstance(result, list)  # Verifica que el resultado es una lista
+        self.assertGreater(len(result), 0)  # Verifica que la lista no está vacía
+        #result[0].to_csv('archivo.csv', sep=';', index=False)
         print(result)
+
+    # def test_directEffects(self):
+    #     result = directEffects(EE=EE, rep = 1000, THR = 0.5, conf_level=0.95)
+    #     print(result)
 
 if __name__ == "__main__":
     unittest.main()
