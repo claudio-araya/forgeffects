@@ -7,14 +7,18 @@ with open(os.path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="forgeffects",
-    version="0.1.4",
+    version="0.1.6",
     description="A package for forgotten effects theory computation using TensorFlow, NumPy, and Pandas.",
-    long_description=long_description,  
+    long_description=long_description,
     long_description_content_type="text/markdown",
     author="Claudio Esteban Araya Toro",
     author_email="claudioesteban.at@gmail.com",
     url="https://github.com/claudio-araya/forgeffects",
     packages=find_packages(),
+    include_package_data=True,
+    package_data={
+        "forgeffects": ["dataset/*.npy"],  
+    },
     install_requires=[
         "tensorflow==2.13",
         "tensorflow_probability==0.20.0",
