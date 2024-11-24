@@ -3,7 +3,6 @@ import tensorflow_probability as tfp
 
 # ESTA OTRA FUNCION SOLO PUEDE PROCESAR TENSORES DE LA FORMA (CANTIDAD DE MATRICES, FILA, COLUMNA)
 
-@tf.function
 def FEempirical(tensor,rep):
 
     if rep <= 0:

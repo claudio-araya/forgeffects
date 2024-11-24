@@ -1,6 +1,5 @@
 import tensorflow as tf
 
-# @tf.function
 def indices(min_result, maxmin_prima, thr):
     
     # Aqui obtengo un tensor unicamente con los valores mayores a thr

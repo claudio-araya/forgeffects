@@ -1,6 +1,5 @@
 import tensorflow as tf
 
-# @tf.function
 def GrafoBipartitoEncadenado(CC,CE,EE):
 
     if CC==None:

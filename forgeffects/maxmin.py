@@ -1,6 +1,5 @@
 import tensorflow as tf
 
-@tf.function
 def maxmin(tensor1, tensor2):
     if tensor1.shape[0] != tensor2.shape[0]:
         raise ValueError("Deben de existir la misma cantidad de expertos en los 2 tensores.")
