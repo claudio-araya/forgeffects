@@ -7,59 +7,59 @@ import numpy as np
 from .GrafoBipartitoEncadenado import GrafoBipartitoEncadenado
 from .process_direct_results import process_direct_results
 
-def directEffects(CC=None, CE=None, EE=None, causas=None, efectos=None, rep=1000, THR=0.5, conf_level=0.95):
+def directEffects(CC=None, CE=None, EE=None, causes=None, effects=None, rep=1000, THR=0.5, conf_level=0.95):
 
     # Verificar que CC, CE, EE sean matrices tridimensionales de numpy
     if CC is not None:
         if not isinstance(CC, np.ndarray) or CC.ndim != 3:
-            raise ValueError("El parámetro 'CC' debe ser una matriz tridimensional de NumPy de la forma (Cantidad de matrices, fila, columna).")
+            raise ValueError("The 'CC' parameter must be a 3D NumPy array with shape (Number of matrices, row, column).")
     if CE is not None:
         if not isinstance(CE, np.ndarray) or CE.ndim != 3:
-            raise ValueError("El parámetro 'CE' debe ser una matriz tridimensional de NumPy de la forma (Cantidad de matrices, fila, columna).")
+            raise ValueError("The 'CE' parameter must be a 3D NumPy array with shape (Number of matrices, row, column).")
     if EE is not None:
         if not isinstance(EE, np.ndarray) or EE.ndim != 3:
-            raise ValueError("El parámetro 'EE' debe ser una matriz tridimensional de NumPy de la forma (Cantidad de matrices, fila, columna).")
+            raise ValueError("The 'EE' parameter must be a 3D NumPy array with shape (Number of matrices, row, column).")
 
     if conf_level < 0 or conf_level > 1:
-        raise ValueError("El nivel de confianza debe estar en el intervalo [0,1].")
+        raise ValueError("The confidence level must be in the range [0,1].")
 
     CC = tf.convert_to_tensor(CC, dtype=tf.float32) if CC is not None else None
     CE = tf.convert_to_tensor(CE, dtype=tf.float32) if CE is not None else None
     EE = tf.convert_to_tensor(EE, dtype=tf.float32) if EE is not None else None
 
     # Verificar la cantidad de nombres proporcionados
-    provided_names = sum(param is not None for param in [causas, efectos])
+    provided_names = sum(param is not None for param in [causes, effects])
 
     # Verificación según el número de nombres proporcionados
     if provided_names == 2:
         if CE is None:
-            raise ValueError("Cuando 'causas' y 'efectos' se proporcionan, CE debe existir.")
+            raise ValueError("When 'causes' and 'effects' are provided, CE must exist.")
         if CC is not None and EE is not None:
-            if len(causas) != CC.shape[1]:
-                raise ValueError(f"La longitud de 'causas' debe ser igual a: {CC.shape[1]}")
-            if len(efectos) != EE.shape[1]:
-                raise ValueError(f"La longitud de 'efectos' debe ser igual a: {EE.shape[1]}")
+            if len(causes) != CC.shape[1]:
+                raise ValueError(f"The length of 'causes' must be equal to: {CC.shape[1]}")
+            if len(effects) != EE.shape[1]:
+                raise ValueError(f"The length of 'effects' must be equal to: {EE.shape[1]}")
             tensor = GrafoBipartitoEncadenado(CC, CE, EE)
         if CC is None and EE is None:
             tensor = CE
         else:
-            raise ValueError("falta CC,EE o ambos.")
+            raise ValueError("Missing CC, EE, or both.")
 
     elif provided_names == 1:
-        if causas is not None and efectos is None:
+        if causes is not None and effects is None:
             if CC is None or CE is not None or EE is not None:
-                raise ValueError("Cuando solo 'causas' es proporcionado, solo CC debe existir.")
-            if len(causas) != CC.shape[1]:
-                raise ValueError(f"La longitud de 'causas' debe ser igual a: {CC.shape[1]}")
+                raise ValueError("When only 'causes' is provided, only CC must exist.")
+            if len(causes) != CC.shape[1]:
+                raise ValueError(f"The length of 'causes' must be equal to: {CC.shape[1]}")
             tensor = CC
-        elif efectos is not None and causas is None:
+        elif effects is not None and causes is None:
             if EE is None or CE is not None or CC is not None:
-                raise ValueError("Cuando solo 'efectos' es proporcionado, solo EE debe existir.")
-            if len(efectos) != EE.shape[1]:
-                raise ValueError(f"La longitud de 'efectos' debe ser igual a: {EE.shape[1]}")
+                raise ValueError("When only 'effects' is provided, only EE must exist.")
+            if len(effects) != EE.shape[1]:
+                raise ValueError(f"The length of 'effects' must be equal to: {EE.shape[1]}")
             tensor = EE
         else:
-            raise ValueError("Debe proporcionar solo 'causas' o solo 'efectos', no ambos si existe solo un tensor.")
+            raise ValueError("You must provide either 'causes' or 'effects', not both if only one tensor exists.")
 
     elif provided_names == 0:
         if CC is not None and CE is not None and EE is not None:
@@ -71,7 +71,7 @@ def directEffects(CC=None, CE=None, EE=None, causas=None, efectos=None, rep=1000
         elif CC is None and CE is not None and EE is None:
             tensor = CE
         else:
-            raise ValueError("Debe proporcionar una combinación válida de tensores.")
+            raise ValueError("You must provide a valid combination of tensors.")
 
     # Calcula la media a lo largo del eje de matrices (primero)
     mx = tf.reduce_mean(tensor, axis=0)
@@ -104,7 +104,7 @@ def directEffects(CC=None, CE=None, EE=None, causas=None, efectos=None, rep=1000
     original_var = tf.math.reduce_variance(tensor, axis=0)
     tstat = (mx - THR) / tf.sqrt(original_var / nx)
 
-    EFF = MX+mx
+    EFF = MX + mx
 
     conf_level = conf_level * 100
 
@@ -117,6 +117,7 @@ def directEffects(CC=None, CE=None, EE=None, causas=None, efectos=None, rep=1000
     es_cuadrado = mx.shape[0] == mx.shape[1]
 
     # Construcción del DataFrame final
-    df_resultados = process_direct_results(mx, UCI, boot_pval, causas, efectos, CC, CE, EE, es_cuadrado)
+    df_resultados = process_direct_results(mx, UCI, boot_pval, causes, effects, CC, CE, EE, es_cuadrado)
     
     return df_resultados
+

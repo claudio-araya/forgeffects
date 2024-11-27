@@ -2,10 +2,10 @@ import tensorflow as tf
 
 def maxmin(tensor1, tensor2):
     if tensor1.shape[0] != tensor2.shape[0]:
-        raise ValueError("Deben de existir la misma cantidad de expertos en los 2 tensores.")
+        raise ValueError("There must be the same number of experts in both tensors.")
 
     if tensor1.shape[2] != tensor2.shape[1]:
-        raise ValueError("Las columnas del tensor 1 deben coincidir con las filas del tensor 2.")
+        raise ValueError("The columns of tensor1 must match the rows of tensor2.")
     
     # Expando las dimensiones de los tensores para poder hacer la comparación elemento a elemento (fila x columna)
     
@@ -22,3 +22,4 @@ def maxmin(tensor1, tensor2):
     max_result = tf.reduce_max(min_result, axis=3)
 
     return min_result, max_result
+

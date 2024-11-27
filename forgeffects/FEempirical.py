@@ -3,10 +3,10 @@ import tensorflow_probability as tfp
 
 # ESTA OTRA FUNCION SOLO PUEDE PROCESAR TENSORES DE LA FORMA (CANTIDAD DE MATRICES, FILA, COLUMNA)
 
-def FEempirical(tensor,rep):
+def FEempirical(tensor, rep):
 
     if rep <= 0:
-        raise ValueError('El número de repeticiones debe ser mayor a 0')
+        raise ValueError('The number of repetitions must be greater than 0')
 
     # Genero un tensor con valores aleatorios para usar en los cuantiles
 
@@ -26,3 +26,4 @@ def FEempirical(tensor,rep):
     shuffled_tensor = tf.reshape(shuffled_tensor, shape)
 
     return tf.transpose(shuffled_tensor, perm=[2, 0, 1])
+

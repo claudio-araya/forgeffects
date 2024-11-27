@@ -1,35 +1,35 @@
 import pandas as pd
 
-def process_direct_results(mx, UCI, boot_pval, causas=None, efectos=None, CC=None, CE=None, EE=None, es_cuadrado=False):
+def process_direct_results(mx, UCI, boot_pval, causes=None, effects=None, CC=None, CE=None, EE=None, es_cuadrado=False):
     # Mapear números a letras según las condiciones
     mapping = {}
 
-    if causas is not None and efectos is None:
-        labels = causas
+    if causes is not None and effects is None:
+        labels = causes
         mapping = {
             "rows": dict(zip(range(len(labels)), labels)),
             "cols": dict(zip(range(len(labels)), labels))
         }
-    elif efectos is not None and causas is None:
-        labels = efectos
+    elif effects is not None and causes is None:
+        labels = effects
         mapping = {
             "rows": dict(zip(range(len(labels)), labels)),
             "cols": dict(zip(range(len(labels)), labels))
         }
-    elif causas is not None and efectos is not None:
-        labels_causas = causas
-        labels_efectos = efectos
+    elif causes is not None and effects is not None:
+        labels_causes = causes
+        labels_effects = effects
         mapping = {
-            "rows": dict(zip(range(len(labels_causas)), labels_causas)),
-            "cols": dict(zip(range(len(labels_efectos)), labels_efectos))
+            "rows": dict(zip(range(len(labels_causes)), labels_causes)),
+            "cols": dict(zip(range(len(labels_effects)), labels_effects))
         }
     else:
         if CC is not None and CE is not None and EE is not None:
             M = CE.shape[1]
             N = CE.shape[2]
-            labels_causas = [f'a{i+1}' for i in range(M)]
-            labels_efectos = [f'b{i+1}' for i in range(N)]
-            labels = labels_causas + labels_efectos
+            labels_causes = [f'a{i+1}' for i in range(M)]
+            labels_effects = [f'b{i+1}' for i in range(N)]
+            labels = labels_causes + labels_effects
             mapping = {
                 "rows": dict(zip(range(M + N), labels)),
                 "cols": dict(zip(range(M + N), labels))
@@ -37,18 +37,18 @@ def process_direct_results(mx, UCI, boot_pval, causas=None, efectos=None, CC=Non
         elif CC is None and CE is not None and EE is None:
             M = CE.shape[1]
             N = CE.shape[2]
-            labels_causas = [f'a{i+1}' for i in range(M)]
-            labels_efectos = [f'b{i+1}' for i in range(N)]
+            labels_causes = [f'a{i+1}' for i in range(M)]
+            labels_effects = [f'b{i+1}' for i in range(N)]
             mapping = {
-                "rows": dict(zip(range(M), labels_causas)),
-                "cols": dict(zip(range(N), labels_efectos))
+                "rows": dict(zip(range(M), labels_causes)),
+                "cols": dict(zip(range(N), labels_effects))
             }
         elif CC is not None and CE is not None and EE is None:
             M = CE.shape[1]
             N = CE.shape[2]
-            labels_causas = [f'a{i+1}' for i in range(M)]
-            labels_efectos = [f'b{i+1}' for i in range(N)]
-            labels = labels_causas + labels_efectos
+            labels_causes = [f'a{i+1}' for i in range(M)]
+            labels_effects = [f'b{i+1}' for i in range(N)]
+            labels = labels_causes + labels_effects
             mapping = {
                 "rows": dict(zip(range(M + N), labels)),
                 "cols": dict(zip(range(M + N), labels))
@@ -56,9 +56,9 @@ def process_direct_results(mx, UCI, boot_pval, causas=None, efectos=None, CC=Non
         elif CC is None and CE is not None and EE is not None:
             M = CE.shape[1]
             N = CE.shape[2]
-            labels_causas = [f'a{i+1}' for i in range(M)]
-            labels_efectos = [f'b{i+1}' for i in range(N)]
-            labels = labels_causas + labels_efectos
+            labels_causes = [f'a{i+1}' for i in range(M)]
+            labels_effects = [f'b{i+1}' for i in range(N)]
+            labels = labels_causes + labels_effects
             mapping = {
                 "rows": dict(zip(range(M + N), labels)),
                 "cols": dict(zip(range(M + N), labels))
@@ -78,7 +78,7 @@ def process_direct_results(mx, UCI, boot_pval, causas=None, efectos=None, CC=Non
                 "cols": dict(zip(range(N), labels))
             }
         else:
-            raise ValueError("La combinación de tensores proporcionados no es válida.")
+            raise ValueError("The provided combination of tensors is not valid.")
 
     num_rows, num_cols = mx.shape
     df = pd.DataFrame({
@@ -97,3 +97,4 @@ def process_direct_results(mx, UCI, boot_pval, causas=None, efectos=None, CC=Non
     df = df[df['Mean'] != 0]
 
     return df
+

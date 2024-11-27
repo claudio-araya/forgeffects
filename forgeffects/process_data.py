@@ -1,9 +1,8 @@
 import numpy as np
 import pandas as pd
-import numpy as np
 import tensorflow as tf
 
-def process_data(tensor, values, CC=None, CE=None, EE=None, causas=None, efectos=None):
+def process_data(tensor, values, CC=None, CE=None, EE=None, causes=None, effects=None):
     # Asegurarnos de que 'tensor' y 'values' sean arreglos de NumPy
     if isinstance(tensor, tf.Tensor):
         tensor = tensor.numpy()
@@ -55,25 +54,25 @@ def process_data(tensor, values, CC=None, CE=None, EE=None, causas=None, efectos
     # Mapear números a etiquetas según las condiciones
     mapping = {}
 
-    if causas is not None and efectos is None:
-        # Caso: Solo 'causas' es proporcionado
-        labels = causas
+    if causes is not None and effects is None:
+        # Caso: Solo 'causes' es proporcionado
+        labels = causes
         mapping = dict(zip(range(len(labels)), labels))
 
-    elif efectos is not None and causas is None:
-        # Caso: Solo 'efectos' es proporcionado
-        labels = efectos
+    elif effects is not None and causes is None:
+        # Caso: Solo 'effects' es proporcionado
+        labels = effects
         mapping = dict(zip(range(len(labels)), labels))
 
-    elif causas is not None and efectos is not None:
-        # Caso: Ambos 'causas' y 'efectos' son proporcionados
-        labels_causas = causas
-        labels_efectos = efectos
-        labels = labels_causas + labels_efectos
+    elif causes is not None and effects is not None:
+        # Caso: Ambos 'causes' y 'effects' son proporcionados
+        labels_causes = causes
+        labels_effects = effects
+        labels = labels_causes + labels_effects
         mapping = dict(zip(range(len(labels)), labels))
 
     else:
-        # Cuando 'causas' y 'efectos' son None
+        # Cuando 'causes' y 'effects' son None
         # Asegurarnos de que 'CC', 'CE' y 'EE' sean arreglos de NumPy si son tensores
         if CC is not None and isinstance(CC, tf.Tensor):
             CC = CC.numpy()
@@ -86,25 +85,25 @@ def process_data(tensor, values, CC=None, CE=None, EE=None, causas=None, efectos
             # Caso: CC, CE y EE existen
             M = CE.shape[1]
             N = CE.shape[2]
-            labels_causas = [f'a{i+1}' for i in range(M)]
-            labels_efectos = [f'b{i+1}' for i in range(N)]
-            labels = labels_causas + labels_efectos
+            labels_causes = [f'a{i+1}' for i in range(M)]
+            labels_effects = [f'b{i+1}' for i in range(N)]
+            labels = labels_causes + labels_effects
             mapping = dict(zip(range(M + N), labels))
         elif CC is not None and CE is not None and EE is None:
             # Caso: CC y CE existen
             M = CE.shape[1]
             N = CE.shape[2]
-            labels_causas = [f'a{i+1}' for i in range(M)]
-            labels_efectos = [f'b{i+1}' for i in range(N)]
-            labels = labels_causas + labels_efectos
+            labels_causes = [f'a{i+1}' for i in range(M)]
+            labels_effects = [f'b{i+1}' for i in range(N)]
+            labels = labels_causes + labels_effects
             mapping = dict(zip(range(M + N), labels))
         elif CC is None and CE is not None and EE is not None:
             # Caso: CE y EE existen
             M = CE.shape[1]
             N = CE.shape[2]
-            labels_causas = [f'a{i+1}' for i in range(M)]
-            labels_efectos = [f'b{i+1}' for i in range(N)]
-            labels = labels_causas + labels_efectos
+            labels_causes = [f'a{i+1}' for i in range(M)]
+            labels_effects = [f'b{i+1}' for i in range(N)]
+            labels = labels_causes + labels_effects
             mapping = dict(zip(range(M + N), labels))
         elif CC is not None and CE is None and EE is None:
             # Caso: Solo CC existe
@@ -117,10 +116,11 @@ def process_data(tensor, values, CC=None, CE=None, EE=None, causas=None, efectos
             labels = [f'b{i+1}' for i in range(N)]
             mapping = dict(zip(range(N), labels))
         else:
-            raise ValueError("La combinación de tensores proporcionados no es válida.")
+            raise ValueError("The provided combination of tensors is not valid.")
 
     # Aplicar el mapeo al DataFrame
     for col in col_names:
         df[col] = df[col].map(mapping)
 
     return df
+

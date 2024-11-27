@@ -4,10 +4,10 @@ from .armar_caminos import armar_caminos
 
 def iterative_maxmin_cuadrado(tensor, thr, order):
     if not (0 <= thr <= 1):
-        raise ValueError("El threshold debe estar en los rangos de [0,1].")
+        raise ValueError("The threshold must be in the range [0,1].")
 
     if order <= 1:
-        raise ValueError("El orden debe ser mayor a 1.")
+        raise ValueError("The order must be greater than 1.")
 
     original_tensor = tensor
     gen_tensor = tensor
@@ -29,9 +29,9 @@ def iterative_maxmin_cuadrado(tensor, thr, order):
         # Almacenar resultados si no están vacíos
         if result_values.numpy().size == 0:  
             if i == 0:
-                raise ValueError(f"No se encontraron efectos con thr {thr}.")
+                raise ValueError(f"No effects found with thr {thr}.")
             else:
-                print(f"Solo se encontraron efectos hasta el orden {i + 1}")
+                print(f"Effects were only found up to order {i + 1}")
                 break
 
         result_tensors_list.append(result_tensor)
@@ -56,3 +56,4 @@ def iterative_maxmin_cuadrado(tensor, thr, order):
     result_values_paths.insert(0, result_values_list[0])
 
     return result_tensors_paths, result_values_paths
+

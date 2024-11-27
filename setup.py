@@ -7,7 +7,7 @@ with open(os.path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="forgeffects",
-    version="0.1.7",
+    version="0.1.8",
     description="A package for forgotten effects theory computation using TensorFlow, NumPy, and Pandas.",
     long_description=long_description,
     long_description_content_type="text/markdown",
