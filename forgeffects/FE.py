@@ -21,6 +21,14 @@ def FE(CC=None, CE=None, EE=None, causes=None, effects=None, rep=1000, THR=0.5, 
     if EE is not None:
         if not isinstance(EE, np.ndarray) or EE.ndim != 3:
             raise ValueError("The 'EE' parameter must be a 3D NumPy array with shape (Number of matrices, row, column).")
+        
+    # Verificar que 'causes' y 'effects' sean arrays con elementos de tipo string
+    if causes is not None:
+        if not isinstance(causes, (list, tuple)) or not all(isinstance(item, str) for item in causes):
+            raise ValueError("The 'causes' parameter must be an array (list or tuple) of strings.")
+    if effects is not None:
+        if not isinstance(effects, (list, tuple)) or not all(isinstance(item, str) for item in effects):
+            raise ValueError("The 'effects' parameter must be an array (list or tuple) of strings.")
 
     # Selecciona el dispositivo
     if device.upper() == 'GPU' and tf.config.list_physical_devices('GPU'):
