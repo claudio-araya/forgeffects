@@ -1,6 +1,7 @@
 ![PyPI](https://img.shields.io/pypi/v/forgeffects) ![License](https://img.shields.io/pypi/l/forgeffects)
 
-**forgeffects** is a Python package designed for the analysis and computation of forgotten effects and direct effects. It leverages tensor-based computations to efficiently process chained bipartite or complete graphs using 3D tensors.
+**forgeffects** is a Python package designed for the analysis and computation of forgotten effects and direct effects. It leverages tensor-based computations, aggregating data from multiple key informants to process chained bipartite or complete graphs using 3D tensors.
+
 
 ## Installation
 
@@ -41,25 +42,25 @@ The `FE()` function identifies indirect paths between causes and effects, enabli
 
 #### Parameters:
 
--   `CC`: A 3D incidence matrix for cause-cause relationships. This matrix must be in Numpy format with the shape (num_experts, rows, columns).
--   `CE`: A 3D incidence matrix for cause-effect relationships. This matrix must be in Numpy format with the shape (num_experts, rows, columns).
--   `EE`: A 3D incidence matrix for effect-effect relationships. This matrix must be in Numpy format with the shape (num_experts, rows, columns).
--   `causes`: (optional) A list or tuple of strings representing custom names for the causes. If not specified, the causes will be automatically named using the notation $a_1, a_2, \dots, a_n$, where $n$ is the number of evaluated causes.
--   `effects`: (optional) A list or tuple of strings representing custom names for the effects. If not specified, the effects will be automatically named using the notation $b_1, b_2, \dots, b_m$, where $m$ is the number of evaluated effects.
--   `THR` (float): Defines the degree of truth in which incidence is considered significant within the range [0,1] (default $0.5$).
--   `maxorder` (int): Maximum order of forgotten effects to compute (default $2$).
--   `reps` (int, optional): Number of replicas for empirical resampling.
+- `CC`: A 3D incidence matrix for cause-cause relationships. This matrix must be in Numpy format with the shape (key informants, rows, columns).
+- `CE`: A 3D incidence matrix for cause-effect relationships. This matrix must be in Numpy format with the shape (key informants, rows, columns).
+- `EE`: A 3D incidence matrix for effect-effect relationships. This matrix must be in Numpy format with the shape (key informants, rows, columns).
+- `causes`: (optional) A list or tuple of strings representing custom names for the causes. If not specified, the causes will be automatically named using the notation $a_1, a_2, \dots, a_n$, where $n$ is the number of evaluated causes.
+- `effects`: (optional) A list or tuple of strings representing custom names for the effects. If not specified, the effects will be automatically named using the notation $b_1, b_2, \dots, b_m$, where $m$ is the number of evaluated effects.
+- `THR` (float): Defines the degree of truth in which incidence is considered significant within the range [0,1] (default $0.5$).
+- `maxorder` (int): Maximum order of forgotten effects to compute (default $2$).
+- `reps` (int): Number of replicas for empirical resampling (default $1000$).
 
 #### Returns:
 
 A list of DataFrames, each corresponding to an evaluated order of forgotten effects, with the following columns:
 
--   `From`: Origin node of the indirect relationship.
--   `Through_x`: Intermediary nodes (dynamic based on the evaluated order).
--   `To`: Destination node of the indirect relationship.
--   `Count`: Number of times a forgotten effect is repeated across different experts.
--   `Mean`: Mean of the forgotten effects identified.
--   `SD`: Standard deviation.
+- `From`: Origin node of the indirect relationship.
+- `Through_x`: Intermediary nodes (dynamic based on the evaluated order).
+- `To`: Destination node of the indirect relationship.
+- `Count`: Number of times a forgotten effect is repeated across different experts.
+- `Mean`: Mean of the forgotten effects identified.
+- `SD`: Standard deviation.
 
 ### Example (Chained bipartite graph)
 
@@ -102,24 +103,24 @@ The `directEffects()` function computes direct effects, estimating mean incidenc
 
 #### Parameters:
 
--   `CC`: A 3D incidence matrix for cause-cause relationships. This matrix must be in Numpy format with the shape (num_experts, rows, columns).
--   `CE`: A 3D incidence matrix for cause-effect relationships. This matrix must be in Numpy format with the shape (num_experts, rows, columns).
--   `EE`: A 3D incidence matrix for effect-effect relationships. This matrix must be in Numpy format with the shape (num_experts, rows, columns).
--   `causes`: (optional) A list or tuple of strings representing custom names for the causes. If not specified, the causes will be automatically named using the notation $a_1, a_2, \dots, a_n$, where $n$ is the number of evaluated causes.
--   `effects`: (optional) A list or tuple of strings representing custom names for the effects. If not specified, the effects will be automatically named using the notation $b_1, b_2, \dots, b_m$, where $m$ is the number of evaluated effects.
--   `THR` (float): Defines the degree of truth in which incidence is considered significant within the range [0,1] (default $0.5$).
--   `conf_level` (float): Confidence level for intervals (default $0.95$).
--   `reps` (int): Defines the number of bootstrap replicates.
+- `CC`: A 3D incidence matrix for cause-cause relationships. This matrix must be in Numpy format with the shape (key informants, rows, columns).
+- `CE`: A 3D incidence matrix for cause-effect relationships. This matrix must be in Numpy format with the shape (key informants, rows, columns).
+- `EE`: A 3D incidence matrix for effect-effect relationships. This matrix must be in Numpy format with the shape (key informants, rows, columns).
+- `causes`: (optional) A list or tuple of strings representing custom names for the causes. If not specified, the causes will be automatically named using the notation $a_1, a_2, \dots, a_n$, where $n$ is the number of evaluated causes.
+- `effects`: (optional) A list or tuple of strings representing custom names for the effects. If not specified, the effects will be automatically named using the notation $b_1, b_2, \dots, b_m$, where $m$ is the number of evaluated effects.
+- `THR` (float): Defines the degree of truth in which incidence is considered significant within the range [0,1] (default $0.5$).
+- `conf_level` (float): Confidence level for intervals (default $0.95$).
+- `reps` (int): Defines the number of bootstrap replicates (default $10000$).
 
 #### Returns:
 
 A DataFrame with the following columns:
 
--   `From`: Origin node of the incidence.
--   `To`: Destination node of the incidence.
--   `Mean`: Mean incidence across experts.
--   `UCI`: Upper confidence interval limit.
--   `p.value`: Calculated p-value.
+- `From`: Origin node of the incidence.
+- `To`: Destination node of the incidence.
+- `Mean`: Mean incidence across experts.
+- `UCI`: Upper confidence interval limit.
+- `p.value`: Calculated p-value.
 
 ### Example (Chained bipartite graph)
 
@@ -165,4 +166,4 @@ The example demonstrates the direct effects identified by the function:
 [4] Chávez-Bustamante, F.; Mardones-Arias, E.; Rojas-Mora, J.; Tijmes-Ihl, J.\
 *A Forgotten Effects Approach to the Analysis of Complex Economic Systems: Identifying Indirect Effects on Trade Networks*. Mathematics, 11(3), Article 531, 2023.
 
-[5] Kohl, M. *MKinfer: Inferential Statistics*. R package version 1.2, 2024. Available at: https://github.com/stamats/MKinfer.
+[5] Kohl, M. *MKinfer: Inferential Statistics*. R package version 1.2, 2024.

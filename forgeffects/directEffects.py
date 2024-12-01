@@ -7,7 +7,7 @@ import numpy as np
 from .GrafoBipartitoEncadenado import GrafoBipartitoEncadenado
 from .process_direct_results import process_direct_results
 
-def directEffects(CC=None, CE=None, EE=None, causes=None, effects=None, rep=1000, THR=0.5, conf_level=0.95):
+def directEffects(CC=None, CE=None, EE=None, causes=None, effects=None, rep=10000, THR=0.5, conf_level=0.95):
 
     # Verificar que CC, CE, EE sean matrices tridimensionales de numpy
     if CC is not None:
