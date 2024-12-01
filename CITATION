@@ -1,0 +1,8 @@
+@Manual{forgeffects,
+  title        = {forgeffects: A Python Package for Analyzing Forgotten and Direct Effects},
+  author       = {Claudio Araya Toro and Julio Rojas Mora},
+  organization = {Universidad Católica de Temuco},
+  year         = {2024},
+  note         = {Python package version 0.2.0},
+  url          = {https://pypi.org/project/forgeffects/}
+}
