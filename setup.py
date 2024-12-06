@@ -7,7 +7,7 @@ with open(os.path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="forgeffects",
-    version="0.2.1",
+    version="0.2.2",
     description="A package for forgotten effects theory computation.",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -30,6 +30,6 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.8, <=3.11',
+    python_requires='>=3.9, <=3.11',
 )
 
