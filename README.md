@@ -99,7 +99,7 @@ The example demonstrates the second-order forgotten effects identified by the fu
 
 ## Direct Effects
 
-The `directEffects()` function computes direct effects, estimating mean incidences, confidence intervals, and p-values. It applies a one-sided t-test with BCa bootstrap to assess the significance of direct relationships.
+The `directEffects()` function calculates direct effects by estimating mean incidences, confidence intervals, and p-values. It uses a one-sided t-test with bootstrapping to evaluate the significance of direct relationships.
 
 #### Parameters:
 
