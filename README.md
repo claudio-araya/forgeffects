@@ -50,6 +50,7 @@ The `FE()` function identifies indirect paths between causes and effects, enabli
 - `THR` (float): Defines the degree of truth in which incidence is considered significant within the range [0,1] (default $0.5$).
 - `maxorder` (int): Maximum order of forgotten effects to compute (default $2$).
 - `reps` (int): Number of replicas for empirical resampling (default $1000$).
+- `device`: Supports both CPU and GPU usage (default CPU).
 
 #### Returns:
 
@@ -68,12 +69,13 @@ A list of DataFrames, each corresponding to an evaluated order of forgotten effe
 import forgeffects as fe
 
 # Compute forgotten effects
-result = fe.FE(CC, CE, EE, rep=10000, THR=0.5, maxorder=3)
+fe_results = fe.FE(CC, CE, EE, rep=10000, THR=0.5, maxorder=3)
 
 # Display the results for the second-order forgotten effects
 print(fe_results[0])
 
-# Note: If additional orders are found, the results for third-order effects can be accessed using fe_results[1],
+# Note: If additional orders are found, the results for
+# third-order effects can be accessed using fe_results[1],
 # for fourth-order effects using fe_results[2], and so on.
 ```
 

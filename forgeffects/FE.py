@@ -44,7 +44,6 @@ def FE(CC=None, CE=None, EE=None, causes=None, effects=None, rep=1000, THR=0.5, 
         CE = tf.convert_to_tensor(CE, dtype=tf.float32) if CE is not None else None
         EE = tf.convert_to_tensor(EE, dtype=tf.float32) if EE is not None else None
 
-        # El resto del código de tu función sin cambios
         provided_names = sum(param is not None for param in [causes, effects])
 
         if provided_names == 2:
