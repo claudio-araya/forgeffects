@@ -1,4 +1,4 @@
-![PyPI](https://img.shields.io/pypi/v/forgeffects) ![License](https://img.shields.io/pypi/l/forgeffects)
+![PyPI](https://img.shields.io/pypi/v/forgeffects) ![License](https://img.shields.io/pypi/l/forgeffects) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/claudio-araya/forgeffects)
 
 **forgeffects** is a Python package designed for the analysis and computation of forgotten effects and direct effects. It leverages tensor-based computations, aggregating data from multiple key informants to process chained bipartite or complete graphs using 3D tensors.
 
