@@ -3,6 +3,6 @@
   author       = {Claudio Araya Toro and Julio Rojas Mora},
   organization = {Universidad Católica de Temuco},
   year         = {2024},
-  note         = {Python package version 0.2.0},
+  note         = {Python package version 0.2.x},
   url          = {https://pypi.org/project/forgeffects/}
 }
